@@ -25,7 +25,7 @@ exports.Regis = (req, res) => {
   };
   User.create(Register).then(ResRegis => {
     if (ResRegis) {
-      const token = jwt.sign({ id: ResRegis.id }, "my-secret-key");
+      const token = jwt.sign({ userId: ResRegis.id }, "my-secret-key");
       res.status(200).send({
         message: "success",
         token

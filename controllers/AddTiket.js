@@ -2,8 +2,9 @@
 const model = require("../models");
 // const Type_Train = model.type_train;
 const Tiket = model.tiket;
+// const Train = model.train;
 
-// -POST /ticket
+// -POST /ticket (10)
 exports.AddTiket = async (req, res) => {
   try {
     const tikettrain = {
