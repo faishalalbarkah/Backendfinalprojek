@@ -10,6 +10,7 @@ exports.Tiket = async (req, res) => {
     const id = req.user.userId;
 
     const iamtiket = await Order.findAll({
+      where: { id_user: id },
       attributes: [
         "id",
         "qty",

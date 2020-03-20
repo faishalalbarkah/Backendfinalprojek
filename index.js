@@ -45,12 +45,16 @@ app.group("/api/v2", router => {
   router.post("/addtiket", authenticated, AddTiketController.AddTiket); //10
   router.get("/tiket", authenticated, TiketController.Tiket); //5
   router.get("/tikett", TiketController.indexTiket);
+  router.post("/order/:id", authenticated, OrderController.insertID); //For Post Tiket di ALBernda
 
   //challange
   // router.get("/challange", authenticated, ChallangeController.challange);
 
   //Tiket
   // router.get("/alltiket", TypeTrainController.AllTiket);
+
+  //Payment
+  router.get("/payment/:id", authenticated, OrderController.payment);
 
   //Order
   router.get("/order/:id", authenticated, OrderController.showOrder); //8

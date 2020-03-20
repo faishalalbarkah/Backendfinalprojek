@@ -21,7 +21,7 @@ exports.Regis = (req, res) => {
     gender,
     phone,
     address,
-    role
+    role: "false"
   };
   User.create(Register).then(ResRegis => {
     if (ResRegis) {
