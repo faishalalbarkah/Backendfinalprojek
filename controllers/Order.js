@@ -17,13 +17,13 @@ exports.InsertOrder = async (req, res) => {
     const subPrice = train.price * qty; //get sub total price
     const remainsQty = train.qty - qty;
     const data = {
-      qty: remainsQty
+      qty: remainsQty,
     };
     // console.log(data);
     if (train.qty) {
       // if (train.qty < qty) {
       const updateTicket = await Tiket.update(data, {
-        where: { id: idTrain }
+        where: { id: idTrain },
       });
 
       const resultRemains = await Tiket.findOne({ where: { id: idTrain } });
@@ -34,7 +34,7 @@ exports.InsertOrder = async (req, res) => {
         qty: qty,
         total_price: subPrice,
         status: "Pending",
-        attachment: attachment
+        attachment: attachment,
       });
 
       if (result) {
@@ -50,8 +50,8 @@ exports.InsertOrder = async (req, res) => {
                 "email",
                 "gender",
                 "phone",
-                "address"
-              ]
+                "address",
+              ],
             },
             {
               model: Tiket,
@@ -62,11 +62,11 @@ exports.InsertOrder = async (req, res) => {
                 "start_station",
                 "start_time",
                 "destination_station",
-                "arrival_time"
+                "arrival_time",
               ],
-              include: { model: Type_train, attributes: ["name_type_train"] }
-            }
-          ]
+              include: { model: Type_train, attributes: ["name_type_train"] },
+            },
+          ],
         });
         // console.log(resultOrder);
 
@@ -75,13 +75,13 @@ exports.InsertOrder = async (req, res) => {
           status: 200,
           message: "success",
           // resultOrder,
-          resultRemains
+          resultRemains,
         });
       }
     } else {
       res.status(404).send({
         status: 404,
-        message: "no ticket"
+        message: "no ticket",
       });
     }
   } catch (error) {}
@@ -95,7 +95,7 @@ exports.showOrder = async (req, res) => {
 
     // console.log(idOrder);
     const admin = await User.findOne({
-      where: { id: id }
+      where: { id: id },
     });
     // console.log(admin);
 
@@ -113,8 +113,8 @@ exports.showOrder = async (req, res) => {
               "email",
               "gender",
               "phone",
-              "address"
-            ]
+              "address",
+            ],
           },
           {
             model: Tiket,
@@ -126,18 +126,18 @@ exports.showOrder = async (req, res) => {
               "start_time",
               "destination_station",
               "arrival_time",
-              "price"
+              "price",
             ],
-            include: { model: Type_train, attributes: ["name_type_train"] }
-          }
-        ]
+            include: { model: Type_train, attributes: ["name_type_train"] },
+          },
+        ],
       });
       res.send(result);
       if (result) {
         res.status(200).send({
           status: 200,
           message: "success",
-          resultOrder
+          resultOrder,
         });
       }
     } else {
@@ -155,8 +155,8 @@ exports.showOrder = async (req, res) => {
               "email",
               "gender",
               "phone",
-              "address"
-            ]
+              "address",
+            ],
           },
           {
             model: Tiket,
@@ -167,18 +167,18 @@ exports.showOrder = async (req, res) => {
               "start_station",
               "start_time",
               "destination_station",
-              "arrival_time"
+              "arrival_time",
             ],
-            include: { model: Type_train, attributes: ["name_type_train"] }
-          }
-        ]
+            include: { model: Type_train, attributes: ["name_type_train"] },
+          },
+        ],
       });
       res.send(result);
       if (result) {
         res.status(200).send({
           status: 200,
           message: "success",
-          resultOrder
+          resultOrder,
         });
       }
     }
@@ -192,12 +192,12 @@ exports.EditOrder = async (req, res) => {
     // ======================================
 
     const resultUpdate = await Order.update(req.body, {
-      where: { id: idOrder }
+      where: { id: idOrder },
     });
 
     res.status(200).send({
       status: 200,
-      message: "success"
+      message: "success",
     });
     // res.send(resultUpdate);
   } catch (error) {}
@@ -220,8 +220,8 @@ exports.index = async (req, res) => {
               "email",
               "gender",
               "phone",
-              "address"
-            ]
+              "address",
+            ],
           },
           {
             model: Tiket,
@@ -232,18 +232,18 @@ exports.index = async (req, res) => {
               "start_station",
               "start_time",
               "destination_station",
-              "arrival_time"
+              "arrival_time",
             ],
-            include: { model: Type_train, attributes: ["name_type_train"] }
-          }
-        ]
+            include: { model: Type_train, attributes: ["name_type_train"] },
+          },
+        ],
       });
       res.send(result);
       if (result) {
         res.status(200).send({
           status: 200,
           message: "success",
-          resultOrder
+          resultOrder,
         });
       }
     } else {
@@ -260,8 +260,8 @@ exports.index = async (req, res) => {
               "email",
               "gender",
               "phone",
-              "address"
-            ]
+              "address",
+            ],
           },
           {
             model: Tiket,
@@ -272,18 +272,18 @@ exports.index = async (req, res) => {
               "start_station",
               "start_time",
               "destination_station",
-              "arrival_time"
+              "arrival_time",
             ],
-            include: { model: Type_train, attributes: ["name_type_train"] }
-          }
-        ]
+            include: { model: Type_train, attributes: ["name_type_train"] },
+          },
+        ],
       });
       res.send(result);
       if (result) {
         res.status(200).send({
           status: 200,
           message: "success",
-          resultOrder
+          resultOrder,
         });
       }
     }
@@ -307,7 +307,7 @@ exports.insertID = async (req, res) => {
     // const id = TiketId;
     // const id = req.tiket.TiketId;
     const findTiket = await Tiket.findOne({
-      where: { id: req.params.id }
+      where: { id: req.params.id },
     });
     // res.send(findTiket);
 
@@ -317,22 +317,22 @@ exports.insertID = async (req, res) => {
       price: findTiket.price,
       qty: 1,
       total_price: findTiket.price * qty,
-      status: "Pending"
+      status: "Pending",
     });
     if (createOrder) {
       const findOrder = await Order.findOne({
-        where: { id: createOrder.id }
+        where: { id: createOrder.id },
       });
       const data = await findOrder.id;
       res.status(200).send({
         message: "success full inputted",
         status: 200,
-        data
+        data,
       });
     } else {
       res.status(400).send({
         message: "data is not entered to repeat",
-        status: 400
+        status: 400,
       });
     }
   } catch (error) {
@@ -353,17 +353,17 @@ exports.payment = async (req, res) => {
         //   where: { status: "Pending" }
         // },
         {
-          model: User
+          model: User,
         },
         {
           model: Tiket,
           include: [
             {
-              model: Type_train
-            }
-          ]
-        }
-      ]
+              model: Type_train,
+            },
+          ],
+        },
+      ],
     });
 
     res.send({ data });
@@ -371,7 +371,22 @@ exports.payment = async (req, res) => {
     console.log(req.user.userId);
 
     res.status(401).send({
-      message: "Error"
+      message: "Error",
+    });
+  }
+};
+
+exports.Deleted = async (req, res) => {
+  try {
+    const data = Order.destroy({
+      where: { id: req.params.id },
+    });
+    res.send({
+      msg: "Sukses Deleted",
+    });
+  } catch (error) {
+    res.status(401).send({
+      error: error.message,
     });
   }
 };

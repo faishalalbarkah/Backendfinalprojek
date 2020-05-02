@@ -15,7 +15,7 @@ const port = 4300;
 
 app.use(bodyParser.json());
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "*");
   res.header("Access-Control-Allow-Methods", "*");
@@ -36,7 +36,7 @@ const OrderController = require("./controllers/Order");
 // const TypeTrainController = require("./controllers/Type_Train");
 
 //Set Router
-app.group("/api/v2", router => {
+app.group("/api/v2", (router) => {
   router.post("/register", RegisController.Regis); //3
   router.post("/login", LoginController.index); //2
   router.get("/user", authenticated, LoginController.cekUser);
@@ -48,7 +48,7 @@ app.group("/api/v2", router => {
   router.post("/order/:id", authenticated, OrderController.insertID); //For Post Tiket di ALBernda
 
   //challange
-  // router.get("/challange", authenticated, ChallangeController.challange);
+  // router.get("/order", authenticated, OrderController.challange);
 
   //Tiket
   // router.get("/alltiket", TypeTrainController.AllTiket);
@@ -61,6 +61,7 @@ app.group("/api/v2", router => {
   router.post("/order", authenticated, OrderController.InsertOrder); // 6
   router.patch("/order/:id", authenticated, OrderController.EditOrder); //9
   router.get("/order", OrderController.index);
+  router.delete("/order/:id", authenticated, OrderController.Deleted);
 });
 
 //when this nodejs app executed, it will listen to defined port
